@@ -1,0 +1,23 @@
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# .NET build outputs
+**/bin/
+**/obj/
+
+# Test outputs
+TestResults/
+*.trx
+
+# IDE and OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+.env.*
+secrets.json
