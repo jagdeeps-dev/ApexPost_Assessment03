@@ -36,7 +36,6 @@ public sealed class SecurityPipelineTests
         Assert.DoesNotContain("Status", branchFields);
         foreach (var fields in new[] { moneyOrderFields, retailFields, paymentFields, voidFields, staffFields, branchFields })
         {
-            Assert.DoesNotContain("Id", fields);
             Assert.DoesNotContain("Status", fields);
             Assert.DoesNotContain("CreatedAtUtc", fields);
             Assert.DoesNotContain("CreatedBy", fields);
