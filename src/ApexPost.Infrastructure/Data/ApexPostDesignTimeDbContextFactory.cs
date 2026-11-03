@@ -14,7 +14,7 @@ public sealed class ApexPostDesignTimeDbContextFactory : IDesignTimeDbContextFac
             .Build();
         var connection = configuration["APEXPOST_CONNECTION_STRING"]
             ?? configuration.GetConnectionString("ApexPost")
-            ?? "Server=(localdb)\\MSSQLLocalDB;Database=ApexPostDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
+            ?? "Server=DESKTOP-FB55L35;Database=ApexPostDb;Integrated Security=True;TrustServerCertificate=True;MultipleActiveResultSets=True;Encrypt=True;Application Intent=ReadWrite;Connection Timeout=30;";
         var options = new DbContextOptionsBuilder<ApexPostDbContext>().UseSqlServer(connection).Options;
         return new ApexPostDbContext(options);
     }

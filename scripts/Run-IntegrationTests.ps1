@@ -1,14 +1,14 @@
 [CmdletBinding()]
 param(
-    [string]$SqlServer = "(localdb)\MSSQLLocalDB",
+    [string]$SqlServer = "DESKTOP-FB55L35",
     [string]$ConnectionString
-)
+ )
 
-$ErrorActionPreference = "Stop"
+ $ErrorActionPreference = "Stop"
 
-if ([string]::IsNullOrWhiteSpace($ConnectionString)) {
-    $ConnectionString = "Server=$SqlServer;Database=master;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True;"
-}
+     if ([string]::IsNullOrWhiteSpace($ConnectionString)) {
+     $ConnectionString = "Server=$SqlServer;Database=master;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True;Application Intent=ReadWrite;Connection Timeout=30;"
+ }
 
 $env:APEXPOST_TEST_CONNECTION = $ConnectionString
 

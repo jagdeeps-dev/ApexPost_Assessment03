@@ -1,0 +1,11 @@
+Assessment final verification summary
+Generated on: 2026-11-02 16:31:43
+SDK: 10.0.402
+Database server: localhost
+Test connection: Server=localhost;Database=master;Integrated Security=True;TrustServerCertificate=True;MultipleActiveResultSets=True;Encrypt=True;
+Restore: PASS
+Release build: PASS (0 warnings, 0 errors)
+Unit tests: PASS (12/12)
+SQL Server integration tests: PASS (26/26)
+Migration apply: PASS
+Package inventory captured

@@ -32,6 +32,7 @@ public sealed class AppSeeder(
             logger.LogInformation("Existing ApexPost data detected; sample records were preserved."); return;
         }
         if (!environment.IsDevelopment() && !configuration.GetValue<bool>("Seed:Enabled")) { logger.LogInformation("Seeding is disabled outside Development."); return; }
+        const int seedBatchSize = 25;
         var branchCodes = new[] { "IND01", "DEL01", "MUM01", "BLR01", "CHN01" };
         var branchList = branchCodes.Select((code, i) => new Branch { Code = code, Name = new[] { "Indore Central", "Delhi North", "Mumbai Central", "Bengaluru East", "Chennai Central" }[i], Region = new[] { "Central", "North", "West", "South", "South" }[i], OpeningHours = "09:00-17:00", Status = code == "CHN01" ? BranchStatus.Closed : BranchStatus.Active, Counters = [new Counter($"{code}-C1", "Counter 1"), new Counter($"{code}-C2", "Counter 2")] }).ToArray();
         foreach (var branch in branchList) await branches.AddAsync(branch, cancellationToken);
@@ -62,6 +63,7 @@ public sealed class AppSeeder(
         // Commit the reference/catalogue stage before querying the generated staff IDs.
         await unitOfWork.SaveChangesAsync(cancellationToken);
         var staffList = await staff.GetAllAsync(cancellationToken);
+
         for (var i = 0; i < 200; i++)
         {
             var branchCode = branchCodes[i % branchCodes.Length]; var branch = branchList[i % branchList.Length];
@@ -86,7 +88,13 @@ public sealed class AppSeeder(
                 Price = line.UnitPrice,
                 CreatedAt = tx.CreatedAt
             }, cancellationToken);
+
+            if ((i + 1) % seedBatchSize == 0)
+            {
+                await unitOfWork.SaveChangesAsync(cancellationToken);
+            }
         }
+
         for (var i = 0; i < 10; i++)
         {
             var branchCode = branchCodes[i % branchCodes.Length];
@@ -117,7 +125,13 @@ public sealed class AppSeeder(
                 BranchCode = branchCode, CounterTransactionId = transaction.Id, Status = MoneyOrderStatus.Issued,
                 IdentityVerificationId = verification.Id, CreatedAt = transaction.CreatedAt
             }, cancellationToken);
+
+            if ((i + 1) % seedBatchSize == 0 || i == 9)
+            {
+                await unitOfWork.SaveChangesAsync(cancellationToken);
+            }
         }
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
         logger.LogInformation("ApexPost development seed data initialized with 200 historical transactions.");
     }

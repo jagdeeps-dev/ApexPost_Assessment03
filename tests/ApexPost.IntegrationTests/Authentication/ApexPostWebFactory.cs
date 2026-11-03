@@ -125,7 +125,7 @@ public sealed class ApexPostWebFactory : WebApplicationFactory<Program>
     private static string BuildTestConnectionString(string databaseName)
     {
         var configured = Environment.GetEnvironmentVariable("APEXPOST_TEST_CONNECTION")
-            ?? "Server=(localdb)\\MSSQLLocalDB;Database=master;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
+            ?? "Server=DESKTOP-FB55L35;Database=master;Integrated Security=True;TrustServerCertificate=True;MultipleActiveResultSets=True;Encrypt=True;Application Intent=ReadWrite;Connection Timeout=30;";
         var builder = new SqlConnectionStringBuilder(configured) { InitialCatalog = databaseName };
         return builder.ConnectionString;
     }
