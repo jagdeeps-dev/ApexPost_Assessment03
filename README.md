@@ -1,7 +1,6 @@
 # ApexPost Counter Platform
 ## Week 03 — SQL Server, EF Core 10 and relational persistence
 
-**Assessment target:** 98–100/100  
 **Solution:** .NET 10 · C# 14 · ASP.NET Core MVC · EF Core 10 · SQL Server  
 **Database:** `ApexPostDb`  
 **Status:** Source and documentation package prepared; machine-specific build, SQL Server tests and performance evidence must be completed before final sign-off.
@@ -242,5 +241,3 @@ Before submission, confirm:
 - Git branches, PRs and meaningful commits are visible in the actual GitHub repository.
 
 The ZIP archive does not include `.git` history, so it cannot prove feature branches, pull requests or commit hygiene. The courier/outbox publisher remains simulated and must not be described as a production carrier or broker integration.
-
-**Assessment target is 98–100 marks. A mark is not guaranteed by documentation alone; the runtime and measured evidence gates above are mandatory.**
